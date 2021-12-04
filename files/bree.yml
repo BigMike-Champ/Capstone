@@ -42,7 +42,7 @@
       shell: IP_ADD=$(hostname -I | cut -f1 -d' ')
       
     - name: Place Variable
-      shell: sudo sed -i "s/Server Alias/Server Alias $IP_ADD/" /etc/apache2/sites-available/cockpit.conf
+      shell: sudo sed -i "s/ServerAlias/ServerAlias $IP_ADD/" /etc/apache2/sites-available/cockpit.conf
       
     - name: Clear Variable
       shell: unset IP_ADD
