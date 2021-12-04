@@ -1,0 +1,70 @@
+- name: bree
+  hosts: all
+  become: yes
+
+
+  tasks:
+    - name: set the hostname
+      hostname:
+        name: "{{hostname}}"
+      
+
+ #   - name: set the root password
+  #    user:
+   #     name: root
+    #    password: "{{root_hash}}"
+     #   state: present
+      #  create_home: yes
+    
+   # - name: create unprivileged user
+    #  user:
+     #   name: "{{user_name}}"
+      #  password: "{{user_hash}}"
+       # state: present
+        #create_home: yes
+      
+
+    - name: drop the root flag
+      copy:
+        dest: "/root/root-flag.txt"
+        content: |
+          "{{root_flag}}"
+        owner: root
+        group: root
+
+
+    - name: drop the user flag
+      copy:
+        dest: "/home/{{user_name}}/user-flag.txt"
+        content: |
+          "{{user_flag}}"
+        owner: "{{user_name}}"
+        group: "{{user_name}}"
+
+    - name: Delete index.html
+      shell: sudo rm /var/www/html/index.html
+
+    - name: copy cockpit directory
+      shell: mv /home/deployer/cockpit /var/www/html
+
+    - name: change owner of cockpit directory
+      shell: sudo chown -R www-data:www-data /var/www/html/cockpit/
+
+    - name: fix permissions for cockpit
+      shell: sudo chmod -R 755 /var/www/html/cockpit/
+
+    - name: copy phpMyAdmin config file
+      copy:
+        src: "files/cockpit.conf"
+        dest: "/etc/apache2/conf-available/cockpit.conf"
+
+    - name: copy php.ini file
+      copy:
+        src: "files/php.ini"
+        dest: "/etc/php/7.4/apache2/php.ini"
+
+    - name: enable cockpit config
+      shell: sudo a2enconf cockpit.conf
+
+    - name: reboot the box to change hostname
+      reboot:

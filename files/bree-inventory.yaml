@@ -1,0 +1,9 @@
+linux_targets:
+  hosts:
+    IpfromDevin:
+      hostname: "bree"
+      root_flag: ""
+      user_flag: ""
+      root_hash: ""
+      user_name: "barliman"
+      user_hash: ""
