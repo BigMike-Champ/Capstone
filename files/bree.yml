@@ -7,37 +7,17 @@
     - name: set the hostname
       hostname:
         name: "{{hostname}}"
-      
-
- #   - name: set the root password
-  #    user:
-   #     name: root
-    #    password: "{{root_hash}}"
-     #   state: present
-      #  create_home: yes
-    
-   # - name: create unprivileged user
-    #  user:
-     #   name: "{{user_name}}"
-      #  password: "{{user_hash}}"
-       # state: present
-        #create_home: yes
-      
 
     - name: drop the root flag
       copy:
-        dest: "/root/root-flag.txt"
-        content: |
-          "{{root_flag}}"
+        src: "files/system_flag.txt"
+        dest: "/root/system_flag.txt"
         owner: root
         group: root
 
-
     - name: drop the user flag
       copy:
-        dest: "/home/{{user_name}}/user-flag.txt"
-        content: |
-          "{{user_flag}}"
+        dest: "/home/{{user_name}}/barliman_flag.txt"
         owner: "{{user_name}}"
         group: "{{user_name}}"
 
@@ -53,7 +33,7 @@
     - name: fix permissions for cockpit
       shell: sudo chmod -R 755 /var/www/html/cockpit/
 
-    - name: copy phpMyAdmin config file
+    - name: copy cockpit config file
       copy:
         src: "files/cockpit.conf"
         dest: "/etc/apache2/conf-available/cockpit.conf"
@@ -65,6 +45,9 @@
 
     - name: enable cockpit config
       shell: sudo a2enconf cockpit.conf
+
+    - name: Enable Cockpit rewrite
+      shell: sudo a2enmod rewrite
 
     - name: reboot the box to change hostname
       reboot:
