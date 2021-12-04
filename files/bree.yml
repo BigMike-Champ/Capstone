@@ -37,7 +37,16 @@
       copy:
         src: "files/cockpit.conf"
         dest: "/etc/apache2/conf-available/cockpit.conf"
-
+     
+    - name: create IP variable
+      shell: IP_ADD=$(hostname -I | cut -f1 -d' ')
+      
+    - name: Place Variable
+      shell: sudo sed -i "s/Server Alias/Server Alias $IP_ADD/" /etc/apache2/sites-available/cockpit.conf
+      
+    - name: Clear Variable
+      shell: unset IP_ADD
+      
     - name: copy php.ini file
       copy:
         src: "files/php.ini"
