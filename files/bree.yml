@@ -7,7 +7,12 @@
     - name: set the hostname
       hostname:
         name: "{{hostname}}"
-
+    
+    - name: Make User Barliman
+      ansible.builtin.user:
+      name: barliman
+      group: sudo
+      
     - name: drop the root flag
       copy:
         src: "files/system_flag.txt"
