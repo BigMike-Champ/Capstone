@@ -8,60 +8,35 @@
       hostname:
         name: "{{hostname}}"
     
-    - name: Make User Barliman
-      ansible.builtin.user:
-      name: barliman
-      group: sudo
-      
+    - name: drop the user flag
+      copy:
+        src: "barliman_flag.txt"
+        dest: "/home/barliman/barliman_flag.txt"
+        owner: barliman
+        group: barliman
+
     - name: drop the root flag
       copy:
-        src: "files/system_flag.txt"
+        src: "system_flag.txt"
         dest: "/root/system_flag.txt"
         owner: root
         group: root
 
-    - name: drop the user flag
-      copy:
-        dest: "/home/{{user_name}}/barliman_flag.txt"
-        owner: "{{user_name}}"
-        group: "{{user_name}}"
-
-    - name: Delete index.html
-      shell: sudo rm /var/www/html/index.html
-
-    - name: copy cockpit directory
-      shell: mv /home/deployer/cockpit /var/www/html
-
-    - name: change owner of cockpit directory
-      shell: sudo chown -R www-data:www-data /var/www/html/cockpit/
-
-    - name: fix permissions for cockpit
-      shell: sudo chmod -R 755 /var/www/html/cockpit/
-
-    - name: copy cockpit config file
-      copy:
-        src: "files/cockpit.conf"
-        dest: "/etc/apache2/conf-available/cockpit.conf"
-     
-    - name: create IP variable
-      shell: IP_ADD=$(hostname -I | cut -f1 -d' ')
-      
-    - name: Place Variable
-      shell: sudo sed -i "s/ServerAlias/ServerAlias $IP_ADD/" /etc/apache2/sites-available/cockpit.conf
-      
+    - name: run script
+      ansible.builtin.script: DHCP_ASSIGN.sh
+       
     - name: Clear Variable
       shell: unset IP_ADD
-      
-    - name: copy php.ini file
-      copy:
-        src: "files/php.ini"
-        dest: "/etc/php/7.4/apache2/php.ini"
+    
+    - name: Fix Permissions for the Service
+      shell: |
+       chown -R www-data:www-data /var/www/html/cockpit/
+       chmod -R 755 /var/www/html/cockpit/
 
-    - name: enable cockpit config
-      shell: sudo a2enconf cockpit.conf
-
-    - name: Enable Cockpit rewrite
-      shell: sudo a2enmod rewrite
+    - name: Restart Apache
+      shell: systemctl restart apache2
 
     - name: reboot the box to change hostname
       reboot:
+    
+   

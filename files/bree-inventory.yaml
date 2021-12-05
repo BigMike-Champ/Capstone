@@ -1,6 +1,6 @@
 linux_targets:
   hosts:
-    IpfromDevin:
+    10.0.0.238:
       hostname: "bree"
       root_flag: "3dcb4ab8-6ef0-4185-8d4b-ccf7fe8b38af"
       user_flag: "df9b89ac-bc51-4921-b9f0-b0f0c2f2cade"
