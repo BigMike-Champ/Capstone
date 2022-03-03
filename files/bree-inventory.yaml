@@ -1,6 +1,6 @@
 linux_targets:
   hosts:
-    10.0.0.238:
+    bree.shire.local:
       hostname: "bree"
       root_flag: "d674fe56-2d32-434b-9e3a-c25aa55fc49c"
       user_flag: "e8aa43c2-9311-465b-9e46-18d1acc6d945"
