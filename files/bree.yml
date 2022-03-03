@@ -2,7 +2,6 @@
   hosts: all
   become: yes
 
-
   tasks:
     - name: set the hostname
       hostname:
@@ -21,15 +20,17 @@
         owner: root
         group: root
         
-    -  name: Delete index.html
+    - name: Delete index.html
       shell: sudo rm /var/www/html/index.html
 
-    - name: run script
-      ansible.builtin.script: DHCP_ASSIGN.sh
-       
-    - name: Clear Variable
-      shell: unset IP_ADD
-    
+    - name: copy cockpit directory
+      shell: mv /home/deployer/cockpit /var/www/html
+      
+    - name: copy php.ini file
+      copy:
+        src: "files/php.ini"
+        dest: "/etc/php/7.4/apache2/php.ini
+      
     - name: Fix Permissions for the Service
       shell: |
        chown -R www-data:www-data /var/www/html/cockpit/
@@ -46,5 +47,4 @@
 
     - name: reboot the box to change hostname
       reboot:
-    
    
