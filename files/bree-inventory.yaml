@@ -2,8 +2,8 @@ linux_targets:
   hosts:
     10.0.0.238:
       hostname: "bree"
-      root_flag: "3dcb4ab8-6ef0-4185-8d4b-ccf7fe8b38af"
-      user_flag: "df9b89ac-bc51-4921-b9f0-b0f0c2f2cade"
+      root_flag: "d674fe56-2d32-434b-9e3a-c25aa55fc49c"
+      user_flag: "e8aa43c2-9311-465b-9e46-18d1acc6d945"
       user_name: "barliman"
       user_hash: "$6$TTGgLbcQSG2HHrPt$6JjiHgf35dIVXK3gN/O.RzPkx9REnXGNZiJNzBCbijsA1H1iXco1KyxWvdrvVERY8SUhF9wz00lMwDDC8j.uA."
 
