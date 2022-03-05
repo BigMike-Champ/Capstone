@@ -29,7 +29,7 @@
     - name: copy php.ini file
       copy:
         src: "files/php.ini"
-        dest: "/etc/php/7.4/apache2/php.ini
+        dest: "/etc/php/7.4/apache2/php.ini"
       
     - name: Fix Permissions for the Service
       shell: |
