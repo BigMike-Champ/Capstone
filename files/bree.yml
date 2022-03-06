@@ -6,7 +6,7 @@
     - name: set the hostname
       hostname:
         name: "{{hostname}}"
-    
+
     - name: drop the user flag
       copy:
         dest: "/home/{{user_name}}/barliman_flag.txt"
@@ -19,29 +19,28 @@
         dest: "/root/system_flag.txt"
         owner: root
         group: root
-        
+
     - name: Make Privileged User
       user:
         name: "{{user_name}}"
 
     - name: Make the Compromised User
-      
+
 
     - name: Delete index.html
       shell: sudo rm /var/www/html/index.html
 
     - name: copy cockpit directory
       shell: mv /home/deployer/cockpit /var/www/html
-      
+
     - name: copy php.ini file
       copy:
         src: "files/php.ini"
         dest: "/etc/php/7.4/apache2/php.ini"
-<<<<<<< HEAD
 
     - name: Move the cockpit conf file
 
-    
+
     - name: move cockpit files to box
 
 
@@ -50,11 +49,9 @@
 
     - name: deploy the cockpit files
       shell: |
-       
-          
-=======
-      
->>>>>>> 6dacf0e63c883f31b7247579f9f1279ae1301026
+
+
+
     - name: Fix Permissions for the Service
       shell: |
        chown -R www-data:www-data /var/www/html/cockpit/
@@ -71,4 +68,4 @@
 
     - name: reboot the box to change hostname
       reboot:
-   
+
