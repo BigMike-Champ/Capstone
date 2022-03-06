@@ -20,6 +20,13 @@
         owner: root
         group: root
         
+    - name: Make Privileged User
+      user:
+        name: "{{user_name}}"
+
+    - name: Make the Compromised User
+      
+
     - name: Delete index.html
       shell: sudo rm /var/www/html/index.html
 
@@ -30,7 +37,24 @@
       copy:
         src: "files/php.ini"
         dest: "/etc/php/7.4/apache2/php.ini"
+<<<<<<< HEAD
+
+    - name: Move the cockpit conf file
+
+    
+    - name: move cockpit files to box
+
+
+    - name: Unzip Files
+
+
+    - name: deploy the cockpit files
+      shell: |
+       
+          
+=======
       
+>>>>>>> 6dacf0e63c883f31b7247579f9f1279ae1301026
     - name: Fix Permissions for the Service
       shell: |
        chown -R www-data:www-data /var/www/html/cockpit/
