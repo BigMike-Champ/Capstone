@@ -7,6 +7,15 @@
       hostname:
         name: "{{hostname}}"
 
+    - name: Make Privileged User
+      user:
+        name: "barliman"
+        password: ''
+        groups:
+         - sudo
+        state: present
+    
+    
     - name: drop the user flag
       copy:
         dest: "/home/{{user_name}}/barliman_flag.txt"
@@ -20,18 +29,15 @@
         owner: root
         group: root
 
-    - name: Make Privileged User
-      user:
-        name: "{{user_name}}"
-
-    - name: Make the Compromised User
+    
+    #- name: Make the Compromised User
 
 
     - name: Delete index.html
       shell: sudo rm /var/www/html/index.html
 
-    - name: copy cockpit directory
-      shell: mv /home/deployer/cockpit /var/www/html
+    #- name: copy cockpit directory
+    #  shell: mv /home/deployer/cockpit /var/www/html
 
     - name: copy php.ini file
       copy:
@@ -39,25 +45,26 @@
         dest: "/etc/php/7.4/apache2/php.ini"
 
     - name: Move the cockpit conf file
+      copy:
+        src: "files/configs/cockpit.conf"
+        dest: "/etc/apache2/sites-available/cockpit.conf"
 
+    - name: Move cockpit files to box
+      copy:
+        src: "files/cockpit_files/cockpit/*"
+        dest: "/var/www/html/cockpit"
 
-    - name: move cockpit files to box
-
-
-    - name: Unzip Files
-
-
-    - name: deploy the cockpit files
-      shell: |
-
-
-
+    #- name: Unzip Files
+        
     - name: Fix Permissions for the Service
       shell: |
        chown -R www-data:www-data /var/www/html/cockpit/
        chmod -R 755 /var/www/html/cockpit/
+    
+    - name: Enable Apache2 Service
+      shell: systemctl enable apache2
 
-    - name: enable cockpit config
+    - name: nable cockpit config
       shell: sudo a2enconf cockpit.conf
 
     - name: Enable Cockpit rewrite
