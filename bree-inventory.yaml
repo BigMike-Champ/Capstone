@@ -1,10 +1,11 @@
 linux_targets:
   hosts:
-    IpfromDevin:
+    bree:
       hostname: "bree"
       root_flag: "3dcb4ab8-6ef0-4185-8d4b-ccf7fe8b38af"
       user_flag: "df9b89ac-bc51-4921-b9f0-b0f0c2f2cade"
       user_name: "barliman"
       user_hash: "$6$TTGgLbcQSG2HHrPt$6JjiHgf35dIVXK3gN/O.RzPkx9REnXGNZiJNzBCbijsA1H1iXco1KyxWvdrvVERY8SUhF9wz00lMwDDC8j.uA."
-
+  vars:
+    ansible_user: deployer
       

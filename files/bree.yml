@@ -9,8 +9,8 @@
 
     - name: Make Privileged User
       user:
-        name: "barliman"
-        password: ''
+        name: "{{user_name}}"
+        password: "{{user_hash}}"
         groups:
          - sudo
         state: present
@@ -19,13 +19,16 @@
     - name: drop the user flag
       copy:
         dest: "/home/{{user_name}}/barliman_flag.txt"
+        content: |
+          "{{user_flag}}"
         owner: "{{user_name}}"
         group: "{{user_name}}"
 
     - name: drop the root flag
       copy:
-        src: "system_flag.txt"
         dest: "/root/system_flag.txt"
+        content: |
+          "{{root_flag}}"
         owner: root
         group: root
 
@@ -41,18 +44,18 @@
 
     - name: copy php.ini file
       copy:
-        src: "files/php.ini"
+        src: "configs/php.ini"
         dest: "/etc/php/7.4/apache2/php.ini"
 
     - name: Move the cockpit conf file
       copy:
-        src: "files/configs/cockpit.conf"
+        src: "configs/cockpit.conf"
         dest: "/etc/apache2/sites-available/cockpit.conf"
 
     - name: Move cockpit files to box
-      copy:
-        src: "files/cockpit_files/cockpit/*"
-        dest: "/var/www/html/cockpit"
+      unarchive:
+        src: "cockpit_files/cockpit.tar"
+        dest: "/var/www/html/"
 
     #- name: Unzip Files
         
@@ -64,8 +67,8 @@
     - name: Enable Apache2 Service
       shell: systemctl enable apache2
 
-    - name: nable cockpit config
-      shell: sudo a2enconf cockpit.conf
+    - name: Enable cockpit config
+      shell: sudo a2ensite cockpit.conf
 
     - name: Enable Cockpit rewrite
       shell: sudo a2enmod rewrite
