@@ -24,6 +24,7 @@
         owner: "{{user_name}}"
         group: "{{user_name}}"
 
+
     - name: drop the root flag
       copy:
         dest: "/root/system_flag.txt"
@@ -33,8 +34,13 @@
         group: root
 
     
-    #- name: Make the Compromised User
-
+    - name: Make the Compromised User
+      user:
+        name: "{{comp_user}}"
+        password: "{{comp_hash}}"
+        groups:
+         - sudo
+        state: present
 
     - name: Delete index.html
       shell: sudo rm /var/www/html/index.html
@@ -56,8 +62,6 @@
       unarchive:
         src: "cockpit_files/cockpit.tar"
         dest: "/var/www/html/"
-
-    #- name: Unzip Files
         
     - name: Fix Permissions for the Service
       shell: |
@@ -78,4 +82,3 @@
 
     - name: reboot the box to change hostname
       reboot:
-
