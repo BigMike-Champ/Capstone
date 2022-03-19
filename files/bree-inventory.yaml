@@ -6,5 +6,7 @@ linux_targets:
       user_flag: "e8aa43c2-9311-465b-9e46-18d1acc6d945"
       user_name: "barliman"
       user_hash: "$6$TTGgLbcQSG2HHrPt$6JjiHgf35dIVXK3gN/O.RzPkx9REnXGNZiJNzBCbijsA1H1iXco1KyxWvdrvVERY8SUhF9wz00lMwDDC8j.uA."
+      comp_user: "samwise"
+      comp_hash: " "
   vars:
     ansible_user: deployer 
