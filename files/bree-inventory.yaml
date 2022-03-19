@@ -5,8 +5,8 @@ linux_targets:
       root_flag: "d674fe56-2d32-434b-9e3a-c25aa55fc49c"
       user_flag: "e8aa43c2-9311-465b-9e46-18d1acc6d945"
       user_name: "barliman"
-      user_hash: "$6$TTGgLbcQSG2HHrPt$6JjiHgf35dIVXK3gN/O.RzPkx9REnXGNZiJNzBCbijsA1H1iXco1KyxWvdrvVERY8SUhF9wz00lMwDDC8j.uA."
+      user_hash: "$6$33Hzgsrg7eRHP3Ht$F0zrDuvVe2EZb4j2wbr72M.mQlLpGap.AlJ9d8i2isV6fRYyR910gdpt9zD51yGVnvwzhOeBo2jTOr/AAYtxF0"
       comp_user: "samwise"
-      comp_hash: " "
+      comp_hash: "$6$JFvQbBOaqdRfNjjp$g7DZAX6TJUMDSMo.pmEGD09hVgqaaM4Mf4k9yKNXfUW4c4cymNf0azgd.QqqojKETLzWGCtvlZ/4zlimn8VTe0"
   vars:
     ansible_user: deployer 
