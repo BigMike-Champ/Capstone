@@ -57,13 +57,14 @@
       copy:
         src: "configs/cockpit.conf"
         dest: "/etc/apache2/sites-available/cockpit.conf"
+        
     - name: Make the directory
       shell: |
         mkdir /var/www/html/cockpit/
         
     - name: Move cockpit files to box
       unarchive:
-        src: "cockpit_files/cockpit.tar"
+        src: "cockpit.tar"
         dest: "/var/www/html/"
         
     - name: Fix Permissions for the Service
