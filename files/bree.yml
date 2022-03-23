@@ -58,9 +58,9 @@
         src: "configs/cockpit.conf"
         dest: "/etc/apache2/sites-available/cockpit.conf"
         
-    - name: Make the directory
-      shell: |
-        mkdir /var/www/html/cockpit/
+   # - name: Make the directory
+   #   shell: |
+   #     mkdir /var/www/html/cockpit/
         
     - name: Move cockpit files to box
       unarchive:
