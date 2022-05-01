@@ -41,6 +41,14 @@ Cockpit Files:
 
 https://github.com/BigMike-Champ/Capstone/tree/main/files
 
+Service Files:
+
+https://github.com/BigMike-Champ/Capstone/tree/main/cockpit
+
+Fake "target activity" Files:
+
+https://github.com/BigMike-Champ/Capstone/tree/main/storage
+
 ***
 
 ### Nancurunir:
